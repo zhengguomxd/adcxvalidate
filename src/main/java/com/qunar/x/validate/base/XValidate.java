@@ -1,11 +1,11 @@
 package com.qunar.x.validate.base;
 
-public class XValidate<T>{
+public class XValidate{
     private String errorMsg;
     private Throwable throwable;
     private boolean success;
 
-    public XValidate(String errorMsg, Throwable throwable, boolean success) {
+    private XValidate(String errorMsg, Throwable throwable, boolean success) {
         this.errorMsg = errorMsg;
         this.throwable = throwable;
         this.success = success;

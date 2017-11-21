@@ -1,7 +1,7 @@
 package com.qunar.x.validate.base;
 
 
-public interface XValidator {
+public interface XValidator<T> {
     /**
      * @return xValidate
      */
@@ -12,5 +12,19 @@ public interface XValidator {
      */
     boolean validate();
 
+
+    default XValidator or(XValidator xValidator){
+        if(xValidator == null){
+            throw  new IllegalArgumentException("xValidator is null");
+        }
+        return GroupValidator.orGroup(this,xValidator);
+    }
+
+    default XValidator and(XValidator xValidator){
+        if(xValidator == null){
+            throw  new IllegalArgumentException("xValidator is null");
+        }
+        return GroupValidator.andGroup(this,xValidator);
+    }
 
 }
