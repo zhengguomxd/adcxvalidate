@@ -1,57 +1,27 @@
 package com.qunar.x.validate.base;
 
+import com.qunar.x.validate.base.imple.FailValidator;
+import com.qunar.x.validate.base.imple.SuccessValidator;
+import com.qunar.x.validate.base.support.ValidatorContextHolder;
+
 import java.util.Date;
 import java.util.Objects;
 import java.util.Stack;
 import java.util.function.Predicate;
 
 /**
- * @Author:zhenghan
- * @Descripotion:
- * @Date:
+ * @Author: zhenghan
+ * @Description:
+ * @Date: 2017/11/26
  */
 public abstract class BaseValidator implements XValidator{
 
-    private Stack<XValidate> stack =  new Stack<>();
+    protected ValidatorContextHolder validatorContextHolder;
 
-    private final static BaseValidator SUCCESS = new SuccessValidator();
-
-    private static class FailValidator extends BaseValidator{
-        private XValidate xValidate;
-
-        public FailValidator(XValidate xValidate) {
-            this.xValidate = xValidate;
-        }
-
-        protected BaseValidator trans(XValidate xValidate){
-            return this;
-        }
-
-        public XValidate validateWithMsg() {
-            return xValidate;
-        }
-
-        public boolean validate() {
-            return false;
-        }
-    }
-    private static class SuccessValidator extends BaseValidator{
-        private XValidate xValidate = XValidate.of(true,null);
-
-        public SuccessValidator() {
-        }
-
-        public XValidate validateWithMsg() {
-            return null;
-        }
-
-        public boolean validate() {
-            return true;
-        }
-    }
-
-    public static BaseValidator generateValidate(){
-        return new SuccessValidator();
+    public static BaseValidator generateValidator() {
+        BaseValidator baseValidator = new SuccessValidator();
+        baseValidator.validatorContextHolder = ValidatorContextHolder.generateContextHolder(baseValidator);
+        return baseValidator;
     }
 
 
@@ -133,10 +103,10 @@ public abstract class BaseValidator implements XValidator{
      *  baseValidator.isNull(null,"not null")
      */
     public <T> BaseValidator reverse(){
-        if(stack.isEmpty()){
+        if(validatorContextHolder.isStackEmpty()){
             throw new RuntimeException("last record not found");
         }
-        XValidate pop = stack.pop();
+        XValidate pop = validatorContextHolder.stackPop();
         pop.setSuccess(!pop.isSuccess());
         return trans(pop);
     }
@@ -147,8 +117,7 @@ public abstract class BaseValidator implements XValidator{
     }
 
     protected BaseValidator trans(XValidate xValidate){
-        return xValidate != null && stack.push(xValidate) != null && xValidate.isSuccess() ? SUCCESS : new FailValidator(xValidate);
+        return xValidate != null && validatorContextHolder.stackPush(xValidate) != null && xValidate.isSuccess() ? validatorContextHolder.success() : new FailValidator(xValidate);
     }
-
 
 }
