@@ -1,8 +1,8 @@
-package com.qunar.x.validate.base.support;
+package com.x.validate.base.support;
 
-import com.qunar.x.validate.base.BaseValidator;
-import com.qunar.x.validate.base.XValidate;
-import com.qunar.x.validate.base.imple.SuccessValidator;
+import com.x.validate.base.BaseValidator;
+import com.x.validate.base.XValidate;
+import com.x.validate.base.imple.SuccessValidator;
 
 import java.util.Stack;
 

@@ -1,12 +1,11 @@
-package com.qunar.x.validate.base;
+package com.x.validate.base;
 
-import com.qunar.x.validate.base.imple.FailValidator;
-import com.qunar.x.validate.base.imple.SuccessValidator;
-import com.qunar.x.validate.base.support.ValidatorContextHolder;
+import com.x.validate.base.imple.FailValidator;
+import com.x.validate.base.imple.SuccessValidator;
+import com.x.validate.base.support.ValidatorContextHolder;
 
 import java.util.Date;
 import java.util.Objects;
-import java.util.Stack;
 import java.util.function.Predicate;
 
 /**
