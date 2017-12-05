@@ -1,4 +1,4 @@
-package com.qunar.x.validate.base;
+package com.x.validate.base;
 
 /**
  * @Author: zhenghan

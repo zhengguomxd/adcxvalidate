@@ -1,4 +1,4 @@
-package com.qunar.x.validate.base;
+package com.x.validate.base;
 
 public class XValidate{
     private String errorMsg;

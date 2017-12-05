@@ -1,7 +1,7 @@
-package com.qunar.x.validate.base.imple;
+package com.x.validate.base.imple;
 
-import com.qunar.x.validate.base.BaseValidator;
-import com.qunar.x.validate.base.XValidate;
+import com.x.validate.base.BaseValidator;
+import com.x.validate.base.XValidate;
 
 /**
  * @Author:zhenghan
