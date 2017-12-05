@@ -34,19 +34,19 @@ public abstract class GroupValidator implements XValidator {
 
     private static class OrGroupValidator extends GroupValidator {
         public OrGroupValidator(XValidator aX, XValidator bX, GroupState or) {
-            super(aX,bX,or);
-        }
+                super(aX,bX,or);
+            }
 
         public XValidate validateWithMsg() {
             XValidate axValidate = getaX().validateWithMsg();
-           if(axValidate.isSuccess()){
-               return axValidate;
-           }
+            if(axValidate.isSuccess()){
+                return axValidate;
+            }
             XValidate bxValidate = getbX().validateWithMsg();
-           if(bxValidate.isSuccess()){
-               return bxValidate;
-           }
-           return axValidate;
+            if(bxValidate.isSuccess()){
+                return bxValidate;
+            }
+            return axValidate;
         }
 
         public boolean validate() {

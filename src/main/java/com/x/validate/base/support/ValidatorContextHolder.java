@@ -4,6 +4,7 @@ import com.x.validate.base.BaseValidator;
 import com.x.validate.base.XValidate;
 import com.x.validate.base.imple.SuccessValidator;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -15,7 +16,7 @@ public class ValidatorContextHolder {
 
     private Stack<XValidate> stack = new Stack<>();
 
-    private BaseValidator successValidator = new SuccessValidator();
+    private BaseValidator successValidator = new SuccessValidator(this);
 
     public Stack<XValidate> getStack() {
         return stack;
@@ -47,7 +48,19 @@ public class ValidatorContextHolder {
     }
 
     public XValidate stackPop() {
-        return stack.pop();
+        try {
+            return stack.pop();
+        }catch (EmptyStackException e){
+        }
+        return null;
+    }
+
+    public XValidate stackPeek() {
+        try {
+            return stack.peek();
+        }catch (EmptyStackException e){
+        }
+        return null;
     }
 
     public XValidate stackPush(XValidate xValidate) {

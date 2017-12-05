@@ -2,6 +2,7 @@ package com.x.validate.base.imple;
 
 import com.x.validate.base.BaseValidator;
 import com.x.validate.base.XValidate;
+import com.x.validate.base.support.ValidatorContextHolder;
 
 /**
  * @Author:zhenghan
@@ -11,11 +12,15 @@ import com.x.validate.base.XValidate;
 public class FailValidator extends BaseValidator {
     private XValidate xValidate;
 
-    public FailValidator(XValidate xValidate) {
+    public FailValidator(XValidate xValidate,ValidatorContextHolder validatorContextHolder) {
         this.xValidate = xValidate;
+        this.validatorContextHolder = validatorContextHolder;
     }
 
     protected BaseValidator trans(XValidate xValidate){
+        if(xValidate != null){
+            validatorContextHolder.stackPush(xValidate);
+        }
         return this;
     }
 
